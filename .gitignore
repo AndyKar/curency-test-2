@@ -1,0 +1,29 @@
+# /system/storage/cache/*
+# !/system/storage/cache/index.html
+
+# Compress Cache Files
+/catalog/view/compress/cache/*.js
+/catalog/view/compress/cache/*.css
+/admin/view/compress/cache/*.js
+/admin/view/compress/cache/*.css
+!/catalog/view/compress/cache/index.html
+!/admin/view/compress/cache/index.html
+
+# Config Files
+/config.php
+/admin/config.php
+
+# Image Cache Files
+/image/cache/*
+!/image/cache/index.html
+
+# Log Files
+# system/storage/logs/*
+# !/system/storage/logs/index.html
+# /*.log
+# /*_log
+
+# Cache Files
+/storage/cache/*
+!/storage/cache/index.html
+/nbproject/private/
