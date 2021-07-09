@@ -34,12 +34,6 @@ final class Loader {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 		
-		// Keep the original trigger
-		$trigger = $route;
-		
-		// Trigger the pre events
-		$result = $this->registry->get('event')->trigger('controller/' . $trigger . '/before', array(&$route, &$data));
-		
 		// Make sure its only the last event that returns an output if required.
 		if ($result != null && !$result instanceof Exception) {
 			$output = $result;
@@ -47,10 +41,7 @@ final class Loader {
 			$action = new Action($route);
 			$output = $action->execute($this->registry, array(&$data));
 		}
-		
-		// Trigger the post events
-		$result = $this->registry->get('event')->trigger('controller/' . $trigger . '/after', array(&$route, &$data, &$output));
-		
+
 		if ($result && !$result instanceof Exception) {
 			$output = $result;
 		}
@@ -104,14 +95,8 @@ final class Loader {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 		
-		// Keep the original trigger
-		$trigger = $route;
-		
 		// Template contents. Not the output!
 		$template = '';
-		
-		// Trigger the pre events
-		$result = $this->registry->get('event')->trigger('view/' . $trigger . '/before', array(&$route, &$data, &$template));
 		
 		// Make sure its only the last event that returns an output if required.
 		if ($result && !$result instanceof Exception) {
@@ -125,9 +110,6 @@ final class Loader {
 				
 			$output = $template->render($this->registry->get('config')->get('template_directory') . $route, $this->registry->get('config')->get('template_cache'));		
 		}
-		
-		// Trigger the post events
-		$result = $this->registry->get('event')->trigger('view/' . $trigger . '/after', array(&$route, &$data, &$output));
 		
 		if ($result && !$result instanceof Exception) {
 			$output = $result;
@@ -178,44 +160,11 @@ final class Loader {
 	 * @param	string	$route
  	*/	
 	public function config($route) {
-		$this->registry->get('event')->trigger('config/' . $route . '/before', array(&$route));
-		
+
 		$this->registry->get('config')->load($route);
 		
-		$this->registry->get('event')->trigger('config/' . $route . '/after', array(&$route));
 	}
 
-	/**
-	 * 
-	 *
-	 * @param	string	$route
-	 * @param	string	$key
-	 *
-	 * @return	array
- 	*/
-	public function language($route, $key = '') {
-		// Sanitize the call
-		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
-		
-		// Keep the original trigger
-		$trigger = $route;
-				
-		$result = $this->registry->get('event')->trigger('language/' . $trigger . '/before', array(&$route, &$key));
-		
-		if ($result && !$result instanceof Exception) {
-			$output = $result;
-		} else {
-			$output = $this->registry->get('language')->load($route, $key);
-		}
-		
-		$result = $this->registry->get('event')->trigger('language/' . $trigger . '/after', array(&$route, &$key, &$output));
-		
-		if ($result && !$result instanceof Exception) {
-			$output = $result;
-		}
-				
-		return $output;
-	}
 	
 	protected function callback($registry, $route) {
 		return function($args) use($registry, $route) {
@@ -223,12 +172,6 @@ final class Loader {
 			
 			$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 
-			// Keep the original trigger
-			$trigger = $route;
-					
-			// Trigger the pre events
-			$result = $registry->get('event')->trigger('model/' . $trigger . '/before', array(&$route, &$args));
-			
 			if ($result && !$result instanceof Exception) {
 				$output = $result;
 			} else {
@@ -252,9 +195,7 @@ final class Loader {
 				}					
 			}
 			
-			// Trigger the post events
-			$result = $registry->get('event')->trigger('model/' . $trigger . '/after', array(&$route, &$args, &$output));
-			
+		
 			if ($result && !$result instanceof Exception) {
 				$output = $result;
 			}

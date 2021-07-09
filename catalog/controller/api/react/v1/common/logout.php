@@ -2,13 +2,11 @@
 class ControllerApiReactV1CommonLogout extends Controller {
 	public function index() {
         
-		$this->load->language('account/logout');
-        
-		$data['heading_title'] = $this->language->get('heading_title');
+		$data['heading_title'] = 'Выход';
 		$data['logout'] = $this->url->link('account/logout');
-        $data['language']['text_message'] = $this->language->get('text_message');
-        $data['language']['button_shopping'] = $this->language->get('button_shopping');
-        $data['continue'] = $this->url->link('common/home');
+        $data['language']['text_message'] = 'somemessage';
+        $data['language']['button_shopping'] = 'Продолжить';
+        //$data['continue'] = $this->url->link('common/home');
 		
 		return $data;
 	}
@@ -17,19 +15,6 @@ class ControllerApiReactV1CommonLogout extends Controller {
 		
 		if ($this->customer->isLogged()) {
 			$this->customer->logout();
-
-			unset($this->session->data['shipping_address']);
-			unset($this->session->data['shipping_method']);
-			unset($this->session->data['shipping_methods']);
-			unset($this->session->data['payment_address']);
-			unset($this->session->data['payment_method']);
-			unset($this->session->data['payment_methods']);
-			unset($this->session->data['comment']);
-			unset($this->session->data['order_id']);
-			unset($this->session->data['coupon']);
-			unset($this->session->data['reward']);
-			unset($this->session->data['voucher']);
-			unset($this->session->data['vouchers']);
             
             SetCookie('auth_token', '', -1, '/');
             SetCookie('auth_jwt_token', '', -1, '/');

@@ -7,22 +7,11 @@ class ControllerApiReactV1CommonMain extends Controller {
         $data['main']['footer'] = $this->load->controller('api/react/v1/common/footer');
 		$data['main']['header'] = $this->load->controller('api/react/v1/common/header');
         
-        $this->load->language('error/not_found');
-        $data['main']['language']['text_empty'] = $this->language->get('text_error');
-        $data['main']['language']['button_shopping'] = $this->language->get('button_shopping');
-        $data['main']['language']['button_back'] = $this->language->get('button_back');
-        $data['main']['language']['button_delete'] = $this->language->get('button_delete');
-        $data['main']['language']['button_edit'] = $this->language->get('button_edit');
-        //$data['main']['language'][''] = $this->language->get('');
-        
-//        $data['main']['language']['wish'] = $this->load->language('account/wishlist');
-//        $data['main']['language']['account'] = $this->load->language('account/account');
-//        
-//        $data['main']['language']['coupon'] = $this->load->language('extension/total/coupon');
-//        $data['main']['language']['checkout'] = $this->load->language('checkout/checkout');;
-//        $data['main']['language']['checkout'] = array_merge($data['main']['language']['checkout'], $this->load->language('extension/quickcheckout/checkout'));
-        
-        
+        $data['main']['language']['text_empty'] = 'text_empty';
+        $data['main']['language']['button_back'] = 'Назад';
+        $data['main']['language']['button_delete'] = 'Удалить';
+        $data['main']['language']['button_edit'] = 'Редактировать';
+
         $data['auth'] = $this->auth();
         $data['auth']['logoutInfo'] = $this->load->controller('api/react/v1/common/logout');
         if(!$this->customer->getId()){
