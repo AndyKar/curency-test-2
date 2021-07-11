@@ -82,7 +82,7 @@ class ControllerApiReactV1AccountCurrency extends Controller {
 
                 $currencies = $this->model_account_currency->getCurrencyByValuteIdDateRange($valuteID, $date1, $date2);
 
-                $data['valute'] = array(
+                $data['currency'] = array(
                     'valuteID'  => $currencies[0]['valuteID'],
                     'numCod'    => $currencies[0]['numCod'],
                     'charCode'  => $currencies[0]['charCode'],
@@ -93,7 +93,7 @@ class ControllerApiReactV1AccountCurrency extends Controller {
                     'date_to'   => $date1 = date('d/m/Y', $date2),
                 );
                 foreach ($currencies as $currency){
-                    $data['currencies'][] = array(
+                    $data['rates'][] = array(
                         'date' => date('d/m/Y', (int)$currency['date'] * 86400),
                         'value' => $currency['value']
                     );
