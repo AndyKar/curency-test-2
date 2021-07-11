@@ -19,7 +19,7 @@ class ControllerApiReactV1AccountCurrency extends Controller {
                 $currency_item = array(
                     'valuteID'  => $currency_code['@attributes']['ID'],
                     'numCode'   => $currency_code['NumCode'],
-                    'сharCode'  => $currency_code['CharCode'],
+                    'charCode'  => $currency_code['CharCode'],
                     'numCode'   => $currency_code['NumCode'],
                     'nominal'   => $currency_code['Nominal'],
                     'name'      => $currency_code['Name']

@@ -4,7 +4,7 @@ class ModelAccountCurrency extends Model {
 
 		$sql = "INSERT INTO " . DB_PREFIX . "valutes SET valuteID = '" . $this->db->escape($data['valuteID']) 
                 . "', numCode = '" . $this->db->escape($data['numCode']) 
-                . "', сharCode = '" . $this->db->escape($data['сharCode']) 
+                . "', charCode = '" . $this->db->escape($data['charCode']) 
                 . "', nominal = '" . (int)$data['nominal']
                 . "', name = '" . $this->db->escape($data['name']) 
                 . "', date_added = NOW()";
