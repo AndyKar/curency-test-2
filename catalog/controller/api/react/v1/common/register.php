@@ -52,21 +52,21 @@ class ControllerApiReactV1CommonRegister extends Controller {
 		if (!$this->customer->isLogged() && isset($this->request->post['email'])) {
 		
 			if ($this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
-				$json['error_warning'] = 'error_exists';
+				$json['error_warning'] = 'Пользователь с таким email уже существует';
             }
             if (!filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)){
-                $json['error_warning'] = 'error email 1 ' . $this->request->post['email'];
+                $json['error_warning'] = 'Некорректный email ' . $this->request->post['email'];
             }    
             $mail_domen = explode('.',explode('@', $customer_info['email'])[1])[1];
             $legal_domen = ['com','org','net','gov','mil','biz','info','mobi','name','aero','jobs','museum'];
             if(strlen($mail_domen) > 2 && !in_array($mail_domen , $legal_domen)){
-                 $json['error_warning'] = 'error email 2';
+                 $json['error_warning'] = 'Некорректный почтовый домен';
 			}
 			if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
-				$json['error_warning'] = 'error password';
+				$json['error_warning'] = 'Пароль должен быть от 4 до 20 символов';
 			}
 			if ($this->request->post['confirm'] != $this->request->post['password']) {
-				$json['error_warning'] = 'error confirm';
+				$json['error_warning'] = 'Пароли не совпадают';
 			}
             
            

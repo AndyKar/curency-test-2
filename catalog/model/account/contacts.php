@@ -32,7 +32,7 @@ class ModelAccountContacts extends Model {
 	}
 
 	public function getContactsByCustomerId($customer_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "contacts WHERE customer_id = '" . (int)$customer_id . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "contacts c WHERE c.customer_id = '" . (int)$customer_id . "' ORDER BY LCASE(c.lastname) ASC");
 
 		return $query->rows;
 	}
@@ -45,13 +45,13 @@ class ModelAccountContacts extends Model {
 	}
     
 	public function getContacts() {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "contacts c WHERE c.customer_id = '" . (int)$this->customer->getId() . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "contacts c WHERE c.customer_id = '" . (int)$this->customer->getId() . "' ORDER BY LCASE(c.lastname) ASC");
 
 		return $query->rows;
 	}
     
 	public function getCorpContacts() {
-		$query = $this->db->query("SELECT * , (SELECT fc.contact_id FROM " . DB_PREFIX . "favorite_contacts fc WHERE fc.customer_id = '" . (int)$this->customer->getId() . "' AND fc.contact_id = c.contact_id) as favorite FROM " . DB_PREFIX . "contacts c WHERE c.customer_id = '1'");
+		$query = $this->db->query("SELECT * , (SELECT fc.contact_id FROM " . DB_PREFIX . "favorite_contacts fc WHERE fc.customer_id = '" . (int)$this->customer->getId() . "' AND fc.contact_id = c.contact_id) as favorite FROM " . DB_PREFIX . "contacts c WHERE c.customer_id = '1' ORDER BY LCASE(c.lastname) ASC");
 
 		return $query->rows;
 	}
