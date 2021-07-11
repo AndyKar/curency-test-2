@@ -56,6 +56,7 @@ RewriteBase /
 
 ### React App Rules
 RewriteCond %{REQUEST_URI} !^api/^
+RewriteRule contacts$ user/index.html [QSA,L]
 RewriteRule account$ user/index.html [QSA,L]
 RewriteRule login$ user/index.html [QSA,L]
 RewriteRule register$ user/index.html [QSA,L]
