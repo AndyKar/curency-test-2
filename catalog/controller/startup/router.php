@@ -1,7 +1,7 @@
 <?php
 class ControllerStartupRouter extends Controller {
 	public function index() {
-		
+
 		// Route
 		if (isset($this->request->get['route']) && $this->request->get['route'] != 'startup/router') {
 			$route = $this->request->get['route'];
@@ -11,11 +11,6 @@ class ControllerStartupRouter extends Controller {
 		
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
-		
-		if ($this->config->get('developer_mode') && isset($this->session->data['user_token']) && substr($this->session->data['user_token'], 0, 3) === 'DEV') {
-
-			$data['$route(preg)'] = $route;
-		}
 	
 		if (!is_null($result)) {
 			return $result;
