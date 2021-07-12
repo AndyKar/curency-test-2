@@ -32,19 +32,25 @@ class ControllerApiReactV1AccountCurrency extends Controller {
         }
     }
         
-    public function initCurrencies() {    
-       
+    public function initCurrencies($date2day = null) {    
+   
         $this->load->model('account/currency');
         $date2 = date('d/m/Y');
+        
+        if(!$date2day){
+            $date2day = strtotime(date('d/m/Y')) / 86400;
+        }
+        
         $date1 = date('d/m/Y', strtotime(date() . " - 30 day"));
         
         $max_date = $this->model_account_currency->getLastCurrenciesDate();
 
         if($max_date['max']){
             $date1 = date('d/m/Y', ((int)$max_date['max'] + 1) * 86400);
+            $date1day = (int)$max_date['max'];
         }
 
-        if($date1 !== $date2){
+        if($date2day > $date1day){
             $valutes = $this->model_account_currency->getAllValutes();
             foreach($valutes as $valute){
                 $url = "http://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=" . $date1 . "&date_req2=" . $date2 . "&VAL_NM_RQ=" . $valute['valuteID'];
@@ -68,15 +74,15 @@ class ControllerApiReactV1AccountCurrency extends Controller {
     
     public function currency() {
         if(isset($this->request->get['valute']) && isset($this->request->get['date1']) && isset($this->request->get['date2'])){
-            
-            $this->initValutes();
-            $this->initCurrencies();
-            
+                       
             $valuteID = $this->request->get['valute'];
             $date1 = strtotime(date($this->request->get['date1'])) / 86400;
             $date2 = strtotime(date($this->request->get['date2'])) / 86400;
-
+            
             if($date1 && $date2 && $valuteID){
+                
+                $this->initValutes();
+                $this->initCurrencies($date2);
 
                 $this->load->model('account/currency');
 
