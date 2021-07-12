@@ -89,8 +89,8 @@ class ControllerApiReactV1AccountCurrency extends Controller {
                     'valuteID'  => $currencies[0]['valuteID'],
                     'nominal'   => $currencies[0]['nominal'],
                     'name'      => $currencies[0]['name'],
-                    'date_from' => $date1 = date('d/m/Y', $date1),
-                    'date_to'   => $date1 = date('d/m/Y', $date2),
+                    'date_from' => $date1 = date('d/m/Y', (int)$date1 * 86400),
+                    'date_to'   => $date1 = date('d/m/Y', (int)$date2 * 86400),
                 );
                 foreach ($currencies as $currency){
                     $data['rates'][] = array(
