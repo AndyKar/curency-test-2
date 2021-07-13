@@ -29,7 +29,7 @@ class ModelAccountCurrency extends Model {
     public function getCurrencyByValuteIdDateRange($valuteID, $date1, $date2) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "currencies c LEFT JOIN " 
                 . DB_PREFIX . "valutes v ON(c.valute_id = v.valute_id) WHERE v.valuteID = '" . $this->db->escape($valuteID) 
-                . "' AND c.date > " . (int)$date1 . " AND c.date < " . (int)$date2;
+                . "' AND c.date >= " . (int)$date1 . " AND c.date <= " . (int)$date2;
 
         $query = $this->db->query($sql);
 		return $query->rows;

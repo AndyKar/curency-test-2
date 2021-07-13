@@ -58,14 +58,24 @@ class ControllerApiReactV1AccountCurrency extends Controller {
                 $json = json_encode($xml);
                 $currencies = json_decode($json,TRUE);
 
-                foreach($currencies['Record'] as $currency){
+                if(!isset($currencies['Record']['@attributes'])){
+                    foreach($currencies['Record'] as $currency){
 
+                        $currency_item = array(
+                            'valute_id' => $valute['valute_id'],
+                            'value'     => str_replace(",", ".", $currency['Value']),
+                            'date'      => strtotime(date($currency['@attributes']['Date'])) / 86400,
+                        );
+
+                        $this->model_account_currency->addCurrency($currency_item);
+                    }
+                } else {
                     $currency_item = array(
                         'valute_id' => $valute['valute_id'],
-                        'value'     => str_replace(",", ".", $currency['Value']),
-                        'date'      => strtotime(date($currency['@attributes']['Date'])) / 86400,
-                    );
-
+                        'value'     => str_replace(",", ".", $currencies['Record']['Value']),
+                        'date'      => strtotime(date($currencies['Record']['@attributes']['Date'])) / 86400,
+                    );                   
+                    
                     $this->model_account_currency->addCurrency($currency_item);
                 }
             }
@@ -78,7 +88,7 @@ class ControllerApiReactV1AccountCurrency extends Controller {
             $valuteID = $this->request->get['valute'];
             $date1 = strtotime(date($this->request->get['date1'])) / 86400;
             $date2 = strtotime(date($this->request->get['date2'])) / 86400;
-            
+
             if($date1 && $date2 && $valuteID){
                 
                 $this->initValutes();
