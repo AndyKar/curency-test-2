@@ -1,6 +1,14 @@
 <?php
 class ControllerApiReactV1AccountCurrency extends Controller {
     
+    private function currencies_language() {
+         // Text
+        $data['heading_title']          = 'Курсы валют';
+        $data['text_more']              = 'Посмотреть все';
+       
+        return $data;
+    }
+    
      public function initValutes() {
         
         $this->load->model('account/currency');
@@ -30,6 +38,42 @@ class ControllerApiReactV1AccountCurrency extends Controller {
             
             $currency_items[] = $currency_item;
         }
+    }
+        
+    public function getCurrencies() {
+        
+        $data['heading_title']          = 'Курсы валют';
+        $data['language'] = $this->currencies_language();
+        $this->load->model('account/currency');
+        
+        $date_max = $this->model_account_currency->getLastCurrenciesDate();
+        $date_min = $this->model_account_currency->getMinCurrenciesDate();
+        
+        if(isset($this->request->get['date'])){
+            $date = strtotime($this->request->get['date']) / 86400;
+        } else {
+            $date = $date_max['max'];
+        }
+
+        $data['date'] = date('d/m/Y', $date * 86400);
+        $dates = $this->model_account_currency->getCurrensiesDates();
+        foreach($dates as $date_item){
+            $data['dates'][] = date('d/m/Y', $date_item['date'] * 86400);
+        }
+        
+        $data['currencies'] = $this->model_account_currency->getCurrensiesByDate($date);
+        $data['minDate'] = date('d/m/Y', $date_min['min'] * 86400);
+        $data['maxDate'] = date('d/m/Y', $date_max['max'] * 86400);
+        
+         if (isset($this->request->server['HTTP_ORIGIN'])) {
+            $this->response->addHeader('Access-Control-Allow-Origin: ' . $this->request->server['HTTP_ORIGIN']);
+            $this->response->addHeader('Access-Control-Allow-Credentials: true');
+            $this->response->addHeader('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+            $this->response->addHeader('Access-Control-Max-Age: 1000');
+            $this->response->addHeader('Access-Control-Allow-Headers:  Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Content-Type, Authorization, X-Requested-With');
+        }
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($data, JSON_UNESCAPED_UNICODE));
     }
         
     public function initCurrencies($date2day = null) {    

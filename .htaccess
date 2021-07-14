@@ -62,9 +62,6 @@ RewriteRule login$ user/index.html [QSA,L]
 RewriteRule register$ user/index.html [QSA,L]
 ### /React App Rules
 
-RewriteCond %{REQUEST_URI} ^api/currency/^
-RewriteRule ^api/currencies/([^?]*)/([^?]*)/([^?]*) index.php?_route_=account/currency/currency?valute=$1&date1=$2&date2=$3 [L,QSA]
-
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html
   AddOutputFilterByType DEFLATE text/css

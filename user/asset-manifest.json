@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/user/static/css/main.b548aee7.chunk.css",
-    "main.js": "/user/static/js/main.77dd1b10.chunk.js",
-    "main.js.map": "/user/static/js/main.77dd1b10.chunk.js.map",
+    "main.css": "/user/static/css/main.4d572b3e.chunk.css",
+    "main.js": "/user/static/js/main.3c526d48.chunk.js",
+    "main.js.map": "/user/static/js/main.3c526d48.chunk.js.map",
     "runtime-main.js": "/user/static/js/runtime-main.73c29457.js",
     "runtime-main.js.map": "/user/static/js/runtime-main.73c29457.js.map",
-    "static/js/2.a8621dd9.chunk.js": "/user/static/js/2.a8621dd9.chunk.js",
-    "static/js/2.a8621dd9.chunk.js.map": "/user/static/js/2.a8621dd9.chunk.js.map",
+    "static/css/2.2a60accc.chunk.css": "/user/static/css/2.2a60accc.chunk.css",
+    "static/js/2.904b9cda.chunk.js": "/user/static/js/2.904b9cda.chunk.js",
+    "static/js/2.904b9cda.chunk.js.map": "/user/static/js/2.904b9cda.chunk.js.map",
     "index.html": "/user/index.html",
-    "precache-manifest.2c54b388d614b74a677e85d9dbd68537.js": "/user/precache-manifest.2c54b388d614b74a677e85d9dbd68537.js",
+    "precache-manifest.b4c49e942391da27f188a7db076504ed.js": "/user/precache-manifest.b4c49e942391da27f188a7db076504ed.js",
     "service-worker.js": "/user/service-worker.js",
-    "static/css/main.b548aee7.chunk.css.map": "/user/static/css/main.b548aee7.chunk.css.map",
-    "static/js/2.a8621dd9.chunk.js.LICENSE.txt": "/user/static/js/2.a8621dd9.chunk.js.LICENSE.txt",
-    "static/js/main.77dd1b10.chunk.js.LICENSE.txt": "/user/static/js/main.77dd1b10.chunk.js.LICENSE.txt",
-    "static/media/emilyz.jpg": "/user/static/media/emilyz.9fcf69e5.jpg",
+    "static/css/2.2a60accc.chunk.css.map": "/user/static/css/2.2a60accc.chunk.css.map",
+    "static/css/main.4d572b3e.chunk.css.map": "/user/static/css/main.4d572b3e.chunk.css.map",
+    "static/js/2.904b9cda.chunk.js.LICENSE.txt": "/user/static/js/2.904b9cda.chunk.js.LICENSE.txt",
     "static/media/main.scss": "/user/static/media/mainbg.113a33b0.png",
     "static/media/molekula_red.png": "/user/static/media/molekula_red.af11aac3.png",
     "static/media/nucleo-icons.css": "/user/static/media/nucleo.f0b489a5.woff",
@@ -21,8 +21,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.73c29457.js",
-    "static/js/2.a8621dd9.chunk.js",
-    "static/css/main.b548aee7.chunk.css",
-    "static/js/main.77dd1b10.chunk.js"
+    "static/css/2.2a60accc.chunk.css",
+    "static/js/2.904b9cda.chunk.js",
+    "static/css/main.4d572b3e.chunk.css",
+    "static/js/main.3c526d48.chunk.js"
   ]
 }

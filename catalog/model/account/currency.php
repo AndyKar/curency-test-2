@@ -35,8 +35,29 @@ class ModelAccountCurrency extends Model {
 		return $query->rows;
 	}
     
+    public function getCurrensiesByDate($date) {
+		$sql = "SELECT * FROM " . DB_PREFIX . "currencies c LEFT JOIN " 
+                . DB_PREFIX . "valutes v ON(c.valute_id = v.valute_id) WHERE c.date = '" . (int)$date . "'";
+
+        $query = $this->db->query($sql);
+		return $query->rows;
+	}
+    
+    public function getCurrensiesDates() {
+		$sql = "SELECT DISTINCT date FROM " . DB_PREFIX . "currencies";
+
+        $query = $this->db->query($sql);
+		return $query->rows;
+	}
+    
     public function getLastCurrenciesDate() {
 		$query = $this->db->query("SELECT MAX(c.date) as max FROM " . DB_PREFIX . "currencies c");
+
+		return $query->row;
+	}
+    
+    public function getMinCurrenciesDate() {
+		$query = $this->db->query("SELECT MIN(c.date) as min FROM " . DB_PREFIX . "currencies c");
 
 		return $query->row;
 	}
